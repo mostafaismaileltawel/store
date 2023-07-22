@@ -8,9 +8,7 @@
 @section('act2','active')
 
 @section('containt')
-<a href="{{route('category.create')}}" class="btn btn-outline-primary mb-5 mr-2">create</a>
-<a href="{{route('categories.trash')}}" class="btn btn-outline-dark mb-5">trash</a>
-
+<a href="{{route('category.index')}}" class="btn btn-outline-primary mb-5">back</a>
 
 <x-form.alert type="success" />
 <x-form.alert type="info" />
@@ -25,9 +23,8 @@
    <th>Image</th> 
   <th>ID</th>
   <th>Name</th>
-  <th>Parent</th>
   <th>status</th>
-  <th>created at</th>
+  <th>deleted at</th>
   <th colspan="2"></th>
 </thead>
 <tbody>
@@ -37,14 +34,16 @@
     <td><img src="{{asset('storage/' . $category->image)}}" alt="" height="50px"></td>
     <td>{{$category->id}}</td>
     <td>{{$category->name}}</td>
-    <td>{{$category->parent_name}}</td>
     <td>{{$category->status}}</td>
-    <td> {{$category->created_at}}</td>
+    <td> {{$category->deleted_at}}</td>
     <td>
-      <a href="{{route('category.edit', $category->id)}}" class="btn btn-outline-primary">edit</a>
-    </td>
+      <form action="{{route('categories.restore',$category->id)}}" method="POST">
+        @csrf
+        @method('put')
+        <button type="submit" class="btn btn-outline-info">restore</button>
+        </form>    </td>
     <td>
-      <form action="{{route('category.destroy',$category->id)}}" method="POST">
+      <form action="{{route('categories.force-delete',$category->id)}}" method="POST">
       @csrf
       @method('delete')
       <button type="submit" class="btn btn-outline-danger">delete</button>

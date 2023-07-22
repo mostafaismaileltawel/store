@@ -146,9 +146,9 @@ if($new_image){
          $category = Category::findOrFail($id);
         $category->delete();
 
-          if($category->image){
-    Storage::disk('public')->delete($category->image);
-    }
+    //       if($category->image){
+    // Storage::disk('public')->delete($category->image);
+    // }
         return Redirect::route('category.index')->with('success','categoey deleted');
 
     }
@@ -171,4 +171,29 @@ if($new_image){
             return $path;
          }
     
+public function trash(){
+    $categories = Category::onlyTrashed()->paginate();
+    return view('dashboard.categories.trash',compact('categories'));
+}
+public function restore(Request $request , $id){
+    $category =  Category::onlyTrashed()->findOrFail($id);
+    $category->restore();
+    return redirect()->route('categories.trash')->with('success','category restore agian');
+    
+}
+   public function forcedelete (Request $request , $id){
+    $category = Category::onlyTrashed()->findOrFail($id);
+    $category->forceDelete();
+    if($category->image){
+        Storage::disk('public')->delete($category->image);
+        }
+        return redirect()->route('categories.trash')->with('info','category deleted forever');
+
+
+
+   }
+
+
+
+
 }

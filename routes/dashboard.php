@@ -6,8 +6,18 @@ use App\Http\Controllers\Dashboard\CategoriesController;
 
 
 
+Route::group(['middleware'=>['auth']],function(){
 
 
 
-Route::resource('/category', CategoriesController::class)->middleware(['auth']);
-Route::get('/search',[ CategoriesController::class,'search'])->middleware(['auth']);
+    Route::get('/categories/trash',[CategoriesController::class, 'trash'])
+    ->name('categories.trash');
+    Route::put('categories/{category}/restore',[CategoriesController::class, 'restore'])
+    ->name('categories.restore');
+    Route::delete('categories/{category}/force-delete',[CategoriesController::class, 'forcedelete'] )->name('categories.force-delete');
+    // ('categories/{category]/force-delete',[CategoriesController::class, 'forcedelete'])
+        // ->name('categories.force-delete');
+    Route::resource('/category', CategoriesController::class);
+// Route::get('/search',[ CategoriesController::class,'search']);
+
+});
