@@ -3,3 +3,6 @@
   {{session($type)}}
 </div>
 @endif
+
+
+

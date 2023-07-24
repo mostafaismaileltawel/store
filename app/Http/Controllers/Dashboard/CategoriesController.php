@@ -28,10 +28,21 @@ class CategoriesController extends Controller
     //     }
     //  $categories = $query->paginate(1);
     //anothe solution by scopefilter function in model category
-    $categories = Category::LeftJoin('categories as parents','parents.id','=','categories.parent_id')
+    $categories = Category::with('parent')
+    //use parent relation without left join
+    /*LeftJoin('categories as parents','parents.id','=','categories.parent_id')
     ->select([
         'categories.*',
         'parents.name as parent_name'
+    ])*/
+    /* ->select('categories.*')
+     ->selectRaw('(SELECT COUNT(*) FROM products WHERE category_id = categories.id) as product_count')
+     replace this select by function withcount()
+     */
+    ->withCount([
+        'products as products_number'=>function($query){
+            $query->where('status','=', 'active');
+        }
     ])
     ->filter($request->query())->OrderBy('categories.name')->paginate();
      return view('dashboard.categories.index',compact('categories'));
@@ -79,7 +90,7 @@ class CategoriesController extends Controller
      */
     public function show(Category $category)
     {
-        
+        return view('dashboard.categories.show',compact('category'));
     }
 
     /**
@@ -154,11 +165,11 @@ if($new_image){
     }
             
     
-    public function search(Request $request){
-      $category_search=  Category::where('name','like', '%'.$request->input('search').'%' )
-      ->orWhere('status','=', $request->input('search'))->get();
-      return view('dashboard.categories.index2',compact('category_search'));
-    }
+    // public function search(Request $request){
+    //   $category_search=  Category::where('name','like', '%'.$request->input('search').'%' )
+    //   ->orWhere('status','=', $request->input('search'))->get();
+    //   return view('dashboard.categories.index2',compact('category_search'));
+    // }
     
     
     public function uploadImage(Request $request){

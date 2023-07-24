@@ -9,7 +9,7 @@
 
 @section('containt')
 <a href="{{route('category.create')}}" class="btn btn-outline-primary mb-5 mr-2">create</a>
-<a href="{{route('categories.trash')}}" class="btn btn-outline-dark mb-5">trash</a>
+{{-- <a href="{{route('categories.trash')}}" class="btn btn-outline-dark mb-5">trash</a> --}}
 
 
 <x-form.alert type="success" />
@@ -25,7 +25,8 @@
    <th>Image</th> 
   <th>ID</th>
   <th>Name</th>
-  <th>Parent</th>
+  <th>parent</th>
+  <th>products #</th>
   <th>status</th>
   <th>created at</th>
   <th colspan="2"></th>
@@ -34,10 +35,13 @@
   @forelse ($categories as $category )
   <tr>
     {{-- @forelse ($categories as $category ) --}}
-    <td><img src="{{asset('storage/' . $category->image)}}" alt="" height="50px"></td>
+    {{-- <td><img src="{{asset('storage/' . $category->image)}}" alt="" height="50px"></td> --}}
+    <td><img src="{{$category->image}}" alt="" height="50px"></td>
+
     <td>{{$category->id}}</td>
-    <td>{{$category->name}}</td>
-    <td>{{$category->parent_name}}</td>
+    <td><a href="{{ route('category.show',$category->id) }}" >{{$category->name}}</a></td>
+    <td>{{$category->parent->name}}</td>
+    <td>{{$category->products_number }}</td>
     <td>{{$category->status}}</td>
     <td> {{$category->created_at}}</td>
     <td>
@@ -51,7 +55,7 @@
       </form>
     </td>
     @empty
-      <td colspan="7">not found category</td>
+      <td colspan="9">not found category</td>
   </tr>
   @endforelse 
 </tbody>

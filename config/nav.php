@@ -13,16 +13,17 @@ return[
     'icon'=>'far fa-circle nav-icon',
      'route'=>'category.index',
      'title'=>'categores',
+     'badge'=>'new',
      'active'=>'category*'
 ],
 ['icon'=>'far fa-circle nav-icon',
-'route'=>'category.index',
+'route'=>'product.index',
 'title'=>'products',
-'active'=>'products.*'
+'active'=>'product.*'
 
 ],
 ['icon'=>'far fa-circle nav-icon',
-'route'=>'category.index',
+'route'=>'product.index',
 'title'=>'order',
 'active'=>'products.*'
 

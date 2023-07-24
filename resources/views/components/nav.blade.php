@@ -11,8 +11,10 @@
           <p>
 {{
 $item['title']
-}}            
-<span class="right badge badge-danger">New</span>
+}}   
+{{-- @dd($item['badge']) --}}
+{{-- 
+            --}}
           </p>
         </a>
       </li>
