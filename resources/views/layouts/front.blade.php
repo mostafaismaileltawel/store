@@ -7,14 +7,14 @@
     <title>{{ $title }}</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon.svg')}}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon.svg') }}" />
 
     <!-- ========================= CSS here ========================= -->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/LineIcons.3.0.css')}}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/tiny-slider.css')}}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/glightbox.min.css')}}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css')}}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/LineIcons.3.0.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/tiny-slider.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/glightbox.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
     @stack('style')
 
 </head>
@@ -112,7 +112,7 @@
                     <div class="col-lg-3 col-md-3 col-7">
                         <!-- Start Header Logo -->
                         <a class="navbar-brand" href="index.html">
-                            <img src="{{ asset('assets/images/logo/logo.svg')}}" alt="Logo">
+                            <img src="{{ asset('assets/images/logo/logo.svg') }}" alt="Logo">
                         </a>
                         <!-- End Header Logo -->
                     </div>
@@ -159,57 +159,7 @@
                                         <span class="total-items">0</span>
                                     </a>
                                 </div>
-                                <div class="cart-items">
-                                    <a href="javascript:void(0)" class="main-btn">
-                                        <i class="lni lni-cart"></i>
-                                        <span class="total-items">2</span>
-                                    </a>
-                                    <!-- Shopping Item -->
-                                    <div class="shopping-item">
-                                        <div class="dropdown-cart-header">
-                                            <span>2 Items</span>
-                                            <a href="cart.html">View Cart</a>
-                                        </div>
-                                        <ul class="shopping-list">
-                                            <li>
-                                                <a href="javascript:void(0)" class="remove" title="Remove this item"><i
-                                                        class="lni lni-close"></i></a>
-                                                <div class="cart-img-head">
-                                                    <a class="cart-img" href="product-details.html"><img
-                                                            src="{{ asset('assets/images/header/cart-items/item1.jpg')}}" alt="#"></a>
-                                                </div>
-
-                                                <div class="content">
-                                                    <h4><a href="product-details.html">
-                                                            Apple Watch Series 6</a></h4>
-                                                    <p class="quantity">1x - <span class="amount">$99.00</span></p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)" class="remove" title="Remove this item"><i
-                                                        class="lni lni-close"></i></a>
-                                                <div class="cart-img-head">
-                                                    <a class="cart-img" href="product-details.html"><img
-                                                            src="{{ asset('assets/images/header/cart-items/item2.jpg')}}" alt="#"></a>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="product-details.html">Wi-Fi Smart Camera</a></h4>
-                                                    <p class="quantity">1x - <span class="amount">$35.00</span></p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div class="bottom">
-                                            <div class="total">
-                                                <span>Total</span>
-                                                <span class="total-amount">$134.00</span>
-                                            </div>
-                                            <div class="button">
-                                                <a href="checkout.html" class="btn animate">Checkout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--/ End Shopping Item -->
-                                </div>
+                                <x-cart-menu />
                             </div>
                         </div>
                     </div>
@@ -283,9 +233,10 @@
                                         </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
-                                            data-bs-target="#submenu-1-3" aria-controls="navbarSupportedContent"
-                                            aria-expanded="false" aria-label="Toggle navigation">Shop</a>
+                                        <a class="dd-menu collapsed" href="javascript:void(0)"
+                                            data-bs-toggle="collapse" data-bs-target="#submenu-1-3"
+                                            aria-controls="navbarSupportedContent" aria-expanded="false"
+                                            aria-label="Toggle navigation">Shop</a>
                                         <ul class="sub-menu collapse" id="submenu-1-3">
                                             <li class="nav-item"><a href="product-grids.html">Shop Grid</a></li>
                                             <li class="nav-item"><a href="product-list.html">Shop List</a></li>
@@ -295,11 +246,13 @@
                                         </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
-                                            data-bs-target="#submenu-1-4" aria-controls="navbarSupportedContent"
-                                            aria-expanded="false" aria-label="Toggle navigation">Blog</a>
+                                        <a class="dd-menu collapsed" href="javascript:void(0)"
+                                            data-bs-toggle="collapse" data-bs-target="#submenu-1-4"
+                                            aria-controls="navbarSupportedContent" aria-expanded="false"
+                                            aria-label="Toggle navigation">Blog</a>
                                         <ul class="sub-menu collapse" id="submenu-1-4">
-                                            <li class="nav-item"><a href="blog-grid-sidebar.html">Blog Grid Sidebar</a>
+                                            <li class="nav-item"><a href="blog-grid-sidebar.html">Blog Grid
+                                                    Sidebar</a>
                                             </li>
                                             <li class="nav-item"><a href="blog-single.html">Blog Single</a></li>
                                             <li class="nav-item"><a href="blog-single-sidebar.html">Blog Single
@@ -343,8 +296,8 @@
     <!-- End Header Area -->
 
     <!-- Start Breadcrumbs -->
-    {{ $breadcrumbs ?? "" }}
-    
+    {{ $breadcrumbs ?? '' }}
+
     <!-- End Breadcrumbs -->
 
     <!-- Start Account Login Area -->
@@ -361,7 +314,7 @@
                         <div class="col-lg-3 col-md-4 col-12">
                             <div class="footer-logo">
                                 <a href="index.html">
-                                    <img src="{{ asset('assets/images/logo/white-logo.svg')}}" alt="#">
+                                    <img src="{{ asset('assets/images/logo/white-logo.svg') }}" alt="#">
                                 </a>
                             </div>
                         </div>
@@ -470,7 +423,8 @@
                         <div class="col-lg-4 col-12">
                             <div class="payment-gateway">
                                 <span>We Accept:</span>
-                                <img src="{{ asset('assets/images/footer/credit-cards-footer.png')}}" alt="#">
+                                <img src="{{ asset('assets/images/footer/credit-cards-footer.png') }}"
+                                    alt="#">
                             </div>
                         </div>
                         <div class="col-lg-4 col-12">
@@ -504,10 +458,10 @@
     </a>
 
     <!-- ========================= JS here ========================= -->
-    <script src="{{ asset('assets/js/bootstrap.min.js')}}"></script>
-    <script src="{{ asset('assets/js/tiny-slider.js')}}"></script>
-    <script src="{{ asset('assets/js/glightbox.min.js')}}"></script>
-    <script src="{{ asset('assets/js/main.js')}}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/tiny-slider.js') }}"></script>
+    <script src="{{ asset('assets/js/glightbox.min.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
     @stack('script')
 </body>
 

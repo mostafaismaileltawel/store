@@ -15,7 +15,8 @@ class CartObserver
     public function creating(Cart $cart)
     {
         $cart->id =Str::uuid();
-    }
+        $cart->cookie_id =Cart::getCookieId();
+        }
 
     /**
      * Handle the Cart "updated" event.

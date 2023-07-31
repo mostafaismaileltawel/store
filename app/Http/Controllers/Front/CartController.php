@@ -10,15 +10,20 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+protected $cart;
+    public function __construct(CartRepositories $cart)
+    {
+        $this->cart= $cart;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(CartRepositories $cart)
+    public function index()
     {
         return view('front.cart',[
-            'cart'=>$cart
+            'cart'=>$this->cart
         ]);
     }
 
@@ -29,14 +34,14 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,CartRepositories $cart)
+    public function store(Request $request)
     {
         $request->validate([
             'product_id'=>['required','int','exists:products,id'],
             'quantity'=>['nullable','int','min:1']
         ]);
         $product = Product::findOrFail($request->post('product_id'));
-$cart->add($product,$request->post('quantity'));
+$this->cart->add($product,$request->post('quantity'));
 return redirect()->route('cart.index')->with('success','product added to cart');
     }
 
@@ -59,14 +64,12 @@ return redirect()->route('cart.index')->with('success','product added to cart');
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CartRepositories $cart)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'product_id'=>['required','int','exists:products,id'],
-            'quantity'=>['nullable','int','min:1']
+            'quantity'=>['required','int','min:1']
         ]);
-        $product = Product::firstOrFail($request->post('product_id'));
-$cart->update($product,$request->post('quantity'));
+$this->cart->update($id,$request->post('quantity'));
     }
 
     /**
@@ -75,8 +78,8 @@ $cart->update($product,$request->post('quantity'));
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CartRepositories $cart, $id)
+    public function destroy($id)
     {
-$cart->delete($id);
+$this->cart->delete($id);
     }
 }
