@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Str;
 class ProductController extends Controller
 {
     /**
@@ -63,7 +64,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $tags = implode(',', $product->tags()->pluck('name')->toArray());
+        return view('dashboard.products.edit',compact('product','tags'));
     }
 
     /**
@@ -73,9 +76,29 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->except('tag'));
+$saved_tags = Tag::all();
+        #explode convert strin to array
+          $tags = json_decode( $request->post('tag'));
+          $tag_ids =[];
+
+          foreach($tags as $item){
+            $slug = Str::slug($item->value);
+            $tag = $saved_tags->where('slug', $slug)->first();
+          if(!$tag){
+
+            $tag=Tag::create([
+                'name'=>$item->value,
+                'slug'=>$slug
+
+            ]);
+          }
+             $tag_ids []= $tag->id;
+          }
+                  $product->tags()->sync($tag_ids);
+        return redirect()->route('product.index')->with('success','update product');
     }
 
     /**

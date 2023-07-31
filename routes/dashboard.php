@@ -3,9 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\CategoriesController;
 use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Dashboard\ProfileController;
+use App\Http\Middleware\CheckUserType;
 
-Route::group(['middleware'=>['auth']],function(){
+Route::group(['middleware'=>['auth','auth.type:admin,super-admin']],function(){
 
+Route::get('profile',[ProfileController::class, 'edit'])->name('profile.edit');
+// Route::patch('profile',[ProfileController::class, 'update'])->name('profile.update');
+Route::patch('profile',[ProfileController::class, 'saveUpdate'])->name('profile.saveUpdate');
 
 
     Route::get('/categories/trash',[CategoriesController::class, 'trash'])
