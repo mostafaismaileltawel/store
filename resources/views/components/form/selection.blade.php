@@ -2,13 +2,13 @@
     'options' => [],
     'name',
     'value2'=>"",
-    'label'
+    'label'=>''
    
 ])
 {{-- @dd($options) --}}
-{{-- @if($label)
+@if($label)
 <label  class="form-label">{{$label}}</label>
-@endif --}}
+@endif
 <select  name="{{$name}}"
  {{ $attributes->class(["form-select form-control form-select-sm",
 'is-invalid'=>$errors->has($name)]) }}>

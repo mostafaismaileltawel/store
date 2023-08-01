@@ -38,6 +38,7 @@ public function add(Product $product , $quantity=1)
                 'quantity'=>$quantity
                 ]);
                 $this->get()->push($cart);
+                return $cart;
         }
 return $item->increment('quantity',$quantity);
     }

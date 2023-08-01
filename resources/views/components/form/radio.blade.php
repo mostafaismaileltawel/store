@@ -1,9 +1,9 @@
 @props([
-    'options'=>'','type'=>'radio' ,'name','value'=>'','label','checked'
+    'options'=>'','type'=>'radio' ,'name','value'=>'','label'=>'','checked'
 
 
 ])
-
+@if($labe)
 <label class="form-check-label"  for="exampleRadios1">
  {{$label}}
 </label>
