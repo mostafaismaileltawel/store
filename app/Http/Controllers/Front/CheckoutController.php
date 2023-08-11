@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Events\OrderCreated;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -29,7 +30,19 @@ class CheckoutController extends Controller
 
     public function store(Request $request, CartRepositories $cart)
     {
-        $request->validate([]);
+        $request->validate([
+            'addr.billing.first_name'=>['required','string','max:255'],
+            'addr.billing.last_name'=>['required','string','max:255'],
+            'addr.billing.phone_number'=>['required','string','max:15'],
+            'addr.billing.country'=>['required','string','max:2'],
+            'addr.billing.street_address'=>['required','string','max:255'],
+            'addr.shipping.first_name'=>['required','string','max:255'],
+            'addr.shipping.last_name'=>['required','string','max:255'],
+            'addr.shipping.phone_number'=>['required','string','max:15'],
+            'addr.shipping.country'=>['required','string','max:2'],
+            'addr.shipping.street_address'=>['required','string','max:255'],
+
+        ]);
         $items = $cart->get()->groupBy('product.store_id');
 
         DB::beginTransaction();
@@ -57,8 +70,10 @@ class CheckoutController extends Controller
                     $order->addresses()->create($address);
                 }
             }
-               $cart->empty();
             DB::commit();
+            // event('created.order',$order);
+            //another solution to event by crate event class 
+            event(new OrderCreated($order));
         } catch (Throwable $e) {
             DB::rollBack();
             throw $e;
